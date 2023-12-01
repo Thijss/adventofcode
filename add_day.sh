@@ -14,6 +14,7 @@ if ! [[ $day =~ ^[0-9]+$ ]]; then
 fi
 
 mkdir adventofcode/day$day
+touch adventofcode/day$day/__init__.py
 touch adventofcode/day$day/data.txt
 touch adventofcode/day$day/solution.py
 touch adventofcode/day$day/test_day$day.py
