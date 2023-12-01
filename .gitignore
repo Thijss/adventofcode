@@ -1,0 +1,14 @@
+### Linux ###
+*~
+
+### macOS ###
+.DS_Store
+
+### Python ###
+__pycache__/
+
+### PyCharm ###
+.idea/
+
+### Visual Studio Code 
+.vscode/
