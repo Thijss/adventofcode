@@ -1,7 +1,7 @@
 from adventofcode.lib import load_data
 
 
-def part1(file_name: str):
+def part1(file_name: str) -> int:
     data = load_data(year=2023, day=1, file_name=file_name)
     data = "".join([x for x in data if x in "1234567890\n"])
     data = data.split("\n")
@@ -24,7 +24,7 @@ _STRING2INT = {
 _INT2STRING = {v: k for k, v in _STRING2INT.items()}
 
 
-def part2(file_name: str):
+def part2(file_name: str) -> int:
     data = load_data(year=2023, day=1, file_name=file_name)
 
     for digit, string in _INT2STRING.items():
@@ -39,8 +39,8 @@ def part2(file_name: str):
     return total_sum
 
 
-def _find_first_digit(line: str):
-    first_digit = None
+def _find_first_digit(line: str) -> int:
+    first_digit = -1
     lowest_index = len(line)
 
     for word in _STRING2INT.keys():
@@ -48,11 +48,14 @@ def _find_first_digit(line: str):
         if index != -1 and index < lowest_index:
             lowest_index = index
             first_digit = _STRING2INT[word]
+
+    if first_digit == -1:
+        raise ValueError(f"Could not find first digit in line: {line}")
     return first_digit
 
 
-def _find_last_digit(line: str):
-    last_digit = None
+def _find_last_digit(line: str) -> int:
+    last_digit = -1
     lowest_index = len(line)
 
     for word in _STRING2INT.keys():
@@ -60,4 +63,7 @@ def _find_last_digit(line: str):
         if index != -1 and index < lowest_index:
             lowest_index = index
             last_digit = _STRING2INT[word]
+
+    if last_digit == -1:
+        raise ValueError(f"Could not find last digit in line: {line}")
     return last_digit
