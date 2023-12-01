@@ -2,7 +2,7 @@ from adventofcode.lib import load_data
 
 
 def part1(file_name: str):
-    data = load_data(day=1, file_name=file_name)
+    data = load_data(year=2023, day=1, file_name=file_name)
     data = "".join([x for x in data if x in "1234567890\n"])
     data = data.split("\n")
     return sum([int(x[0] + x[-1]) for x in data])
@@ -25,7 +25,7 @@ _INT2STRING = {v: k for k, v in _STRING2INT.items()}
 
 
 def part2(file_name: str):
-    data = load_data(day=1, file_name=file_name)
+    data = load_data(year=2023, day=1, file_name=file_name)
 
     for digit, string in _INT2STRING.items():
         data = data.replace(str(digit), string)
