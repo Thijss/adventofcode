@@ -20,4 +20,4 @@ jobs:
           cache: "poetry"
       - run: poetry run python --version
       - run: poetry install
-      - run: poetry pytest
+      - run: poetry run pytest
