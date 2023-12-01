@@ -1,4 +1,4 @@
-from adventofcode.day1.solution import part1, part2
+from adventofcode.year2023.day1.solution import part1, part2
 
 
 def test_day1_part1_test_data():
