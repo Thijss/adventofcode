@@ -21,10 +21,10 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pyright]
 include = ["adventofcode"]
+strict = ["adventofcode"]
 
 reportMissingImports = true
 reportMissingTypeStubs = false
-
 pythonVersion = "3.12"
 pythonPlatform = "Linux"
 
