@@ -1,3 +1,3 @@
 # adventofcode
 
-This project contains my solutions for <https://adventofcode.com> (2023)
+This project contains my solutions for <https://adventofcode.com>
