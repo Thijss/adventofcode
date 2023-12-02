@@ -16,12 +16,6 @@ def part1(file_name: str) -> int:
     return sum
 
 
-def _calculate_prio(letter: str) -> int:
-    if letter.isupper():
-        return (alphabet.index(letter.lower()) + 1) + 26
-    return alphabet.index(letter) + 1
-
-
 def part2(file_name: str) -> int:
     data = load_data(year=2022, day=3, file_name=file_name)
     data = data.replace("\n", "🎅")
@@ -32,3 +26,9 @@ def part2(file_name: str) -> int:
         prio = _calculate_prio(badge)
         sum += prio
     return sum
+
+
+def _calculate_prio(letter: str) -> int:
+    if letter.isupper():
+        return (alphabet.index(letter.lower()) + 1) + 26
+    return alphabet.index(letter) + 1
