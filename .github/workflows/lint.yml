@@ -24,4 +24,3 @@ jobs:
       - run: poetry run isort .
       - run: poetry run ruff check .
       - run: poetry run pyright .
-      - run: poetry run flake8 .
