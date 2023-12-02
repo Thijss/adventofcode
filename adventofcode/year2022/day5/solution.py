@@ -9,9 +9,22 @@ def part1(file_name: str) -> str:
     *crates, _ = crates.split("\n")
     stacks = _build_stacks(crates)
 
-    instructions: list[tuple[int, ...]] = [tuple(map(int, re.findall(r"[0-9]+", move))) for move in moves.split("\n")]
+    instructions = _parse_moves(moves)
 
-    _apply_instructions(stacks, instructions)
+    _apply_instructions(stacks, instructions, reverse=True)
+    message = "".join([stack.pop() for stack in stacks.values() if stack])
+    return message
+
+
+def part2(file_name: str) -> str:
+    data = load_data(year=2022, day=5, file_name=file_name)
+    crates, moves = data.split("\n\n")
+    *crates, _ = crates.split("\n")
+    stacks = _build_stacks(crates)
+
+    instructions = _parse_moves(moves)
+
+    _apply_instructions(stacks, instructions, reverse=False)
     message = "".join([stack.pop() for stack in stacks.values() if stack])
     return message
 
@@ -29,9 +42,14 @@ def _build_stacks(crates: list[str]) -> dict[int, list[str]]:
     return stacks
 
 
-def _apply_instructions(stacks: dict[int, list[str]], instructions: list[tuple[int, ...]]) -> None:
+def _parse_moves(moves: str) -> list[tuple[int, ...]]:
+    return [tuple(map(int, re.findall(r"[0-9]+", move))) for move in moves.split("\n")]
+
+
+def _apply_instructions(stacks: dict[int, list[str]], instructions: list[tuple[int, ...]], reverse: bool) -> None:
     for amount, from_stack, to_stack in instructions:
         crates = stacks[from_stack][-amount:]
-        crates.reverse()
+        if reverse:
+            crates.reverse()
         stacks[to_stack].extend(crates)
         stacks[from_stack] = stacks[from_stack][:-amount]
