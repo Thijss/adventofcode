@@ -19,4 +19,3 @@ def test_day1_part2_test_data() -> None:
 def test_day1_part2_real_data() -> None:
     answer = part2("real_data.txt")
     assert 69110 == answer
-

@@ -7,7 +7,6 @@ _ELF_BAG = {
 }
 
 
-
 def part1(file_name: str) -> int:
     data = load_data(year=2023, day=2, file_name=file_name)
     data = data.replace(";", ",")
@@ -50,5 +49,5 @@ def _parse_game(game: str) -> tuple[int, list[tuple[int, str]]]:
     game_id, draws = game.split(": ")
     game_id = int(game_id.replace("Game ", ""))
     draws = draws.split(", ")
-    draws = [(int(count), color)  for count, color in [draw.split(" ") for draw in draws]]
+    draws = [(int(count), color) for count, color in [draw.split(" ") for draw in draws]]
     return game_id, draws
