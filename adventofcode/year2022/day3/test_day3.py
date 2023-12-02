@@ -1,21 +1,21 @@
-from adventofcode.year2022.day1.solution import part1, part2
+from adventofcode.year2022.day3.solution import part1, part2
 
 
 def test_day1_part1_test_data() -> None:
     answer = part1("test_data.txt")
-    assert 24000 == answer
+    assert 157 == answer
 
 
 def test_day1_part1_real_data() -> None:
     answer = part1("real_data.txt")
-    assert 68292 == answer
+    assert 7581 == answer
 
 
 def test_day1_part2_test_data() -> None:
     answer = part2("test_data.txt")
-    assert 45000 == answer
+    assert 70 == answer
 
 
 def test_day1_part2_real_data() -> None:
     answer = part2("real_data.txt")
-    assert 203203 == answer
+    assert 2525 == answer
