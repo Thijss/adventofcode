@@ -48,11 +48,13 @@ def part2(file_name: str) -> int:
                 total += prod(linked_numbers)
     return total
 
+
 def _get_idx_dict(data_dict: dict[int, str], pattern: str) -> dict[int, list[tuple[int, int]]]:
     idx_dixt: dict[int, list[tuple[int, int]]] = {}
     for idx, line in data_dict.items():
         idx_dixt[idx] = [(m.start(), m.end()) for m in re.finditer(pattern, line)]
     return idx_dixt
+
 
 def _find_symbol(data_dict: dict[int, str], line: int, start: int, end: int) -> bool:
     if line in [-1, len(data_dict)]:
