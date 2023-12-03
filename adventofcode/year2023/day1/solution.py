@@ -8,22 +8,6 @@ def part1(file_name: str) -> int:
     return sum([int(x[0] + x[-1]) for x in data])
 
 
-_STRING2INT = {
-    "zero": 0,
-    "one": 1,
-    "two": 2,
-    "three": 3,
-    "four": 4,
-    "five": 5,
-    "six": 6,
-    "seven": 7,
-    "eight": 8,
-    "nine": 9,
-}
-
-_INT2STRING = {v: k for k, v in _STRING2INT.items()}
-
-
 def part2(file_name: str) -> int:
     data = load_data(year=2023, day=1, file_name=file_name)
 
@@ -67,3 +51,19 @@ def _find_last_digit(line: str) -> int:
     if last_digit == -1:
         raise ValueError(f"Could not find last digit in line: {line}")
     return last_digit
+
+
+_STRING2INT = {
+    "zero": 0,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+}
+
+_INT2STRING = {v: k for k, v in _STRING2INT.items()}
