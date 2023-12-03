@@ -9,9 +9,7 @@ def part1(file_name: str) -> int:
 
     data_dict: dict[int, str] = {idx: line for idx, line in enumerate(data.split("\n"))}
 
-    number_dict: dict[int, list[tuple[int, int]]] = {}
-    for idx, line in data_dict.items():
-        number_dict[idx] = [(m.start(), m.end()) for m in re.finditer(r"[0-9]+", line)]
+    number_dict = _get_idx_dict(data_dict, pattern=r"[0-9]+")
 
     total = 0
     for line, numbers in number_dict.items():
@@ -32,17 +30,12 @@ def part2(file_name: str) -> int:
     data = load_data(year=2023, day=3, file_name=file_name)
     data_dict: dict[int, str] = {idx: line for idx, line in enumerate(data.split("\n"))}
 
-    gear_dict: dict[int, list[int]] = {}
-    for idx, line in data_dict.items():
-        gear_dict[idx] = [m.start() for m in re.finditer(r"\*", line)]
-
-    number_dict: dict[int, list[tuple[int, int]]] = {}
-    for idx, line in data_dict.items():
-        number_dict[idx] = [(m.start(), m.end()) for m in re.finditer(r"[0-9]+", line)]
+    gear_dict = _get_idx_dict(data_dict, pattern=r"\*")
+    number_dict = _get_idx_dict(data_dict, pattern=r"[0-9]+")
 
     total = 0
     for line, gears in gear_dict.items():
-        for gear_idx in gears:
+        for gear_idx, _ in gears:
             start_idx = max(0, gear_idx - 1)
             end_idx = min(len(data_dict[line]) - 1, gear_idx + 1)
             search_range = set(range(start_idx, end_idx + 1))
@@ -55,6 +48,11 @@ def part2(file_name: str) -> int:
                 total += prod(linked_numbers)
     return total
 
+def _get_idx_dict(data_dict: dict[int, str], pattern: str) -> dict[int, list[tuple[int, int]]]:
+    idx_dixt: dict[int, list[tuple[int, int]]] = {}
+    for idx, line in data_dict.items():
+        idx_dixt[idx] = [(m.start(), m.end()) for m in re.finditer(pattern, line)]
+    return idx_dixt
 
 def _find_symbol(data_dict: dict[int, str], line: int, start: int, end: int) -> bool:
     if line in [-1, len(data_dict)]:
