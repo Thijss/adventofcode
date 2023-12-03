@@ -17,7 +17,7 @@ def part1(file_name: str) -> int:
         for start, end in numbers:
             number = int(data_dict[line][start:end])
             start_idx = max(0, start - 1)
-            end_idx = min(len(data_dict[line]) - 1, end + 1)
+            end_idx = min(len(data_dict[line]) - 1, end)
 
             if _adjacent_symbol(data_dict, line, start_idx, end_idx):
                 total += number
@@ -37,14 +37,14 @@ def _adjacent_symbol(data_dict: dict[int, str], line: int, start: int, end: int)
 
 
 def _symbol_above(data_dict: dict[int, str], line: int, start: int, end: int) -> bool:
-    return bool(line > 0 and re.findall(r"[^.]", data_dict[line - 1][start:end]))
+    return bool(line > 0 and re.findall(r"[^.]", data_dict[line - 1][start:end + 1]))
 
 
 def _symbol_below(data_dict: dict[int, str], line: int, start: int, end: int) -> bool:
-    return bool(line < len(data_dict) - 1 and re.findall(r"[^.]", data_dict[line + 1][start:end]))
+    return bool(line < len(data_dict) - 1 and re.findall(r"[^.]", data_dict[line + 1][start:end + 1]))
 
 
 def _symbol_left_or_right(data_dict: dict[int, str], line: int, start: int, end: int) -> bool:
     left = data_dict[line][start] != "." if start > 0 else False
-    right = data_dict[line][end - 1] != "." if end < len(data_dict[line]) - 1 else False
+    right = data_dict[line][end] != "." if end < len(data_dict[line]) - 1 else False
     return left or right
