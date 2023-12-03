@@ -16,8 +16,6 @@ def part1(file_name: str) -> int:
     for line, numbers in start_dict.items():
         for start, end in numbers:
             number = int(data_dict[line][start:end])
-            if number == 58:
-                print()
             start_idx = max(0, start - 1)
             end_idx = min(len(data_dict[line]) - 1, end + 1)
 
