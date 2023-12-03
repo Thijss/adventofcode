@@ -20,7 +20,6 @@ def part1(file_name: str) -> int:
             end_idx = min(len(data_dict[line]) - 1, end + 1)
 
             if _adjacent_symbol(data_dict, line, start_idx, end_idx):
-                print(number)
                 total += number
     return total
 
