@@ -1,6 +1,6 @@
-
-from collections import defaultdict
 import re
+from collections import defaultdict
+
 from adventofcode.lib import load_data
 
 _DATA_INDICES: dict[str, int] = {
@@ -12,6 +12,7 @@ _DATA_INDICES: dict[str, int] = {
     "temp2hum": 6,
     "hum2loc": 7,
 }
+
 
 def part1(file_name: str) -> int:
     data: str = load_data(year=2023, day=5, file_name=file_name)
@@ -37,20 +38,17 @@ def part2(file_name: str) -> int:
 
     # seed_ranges = [seed_ranges[3]]
 
-    
     for converter in converters.values():
-
         new_ranges: list[range] = []
         for seed_range in seed_ranges:
             new_ranges += _apply_converters(converter, seed_range)
         seed_ranges = new_ranges
 
-    starts = [seed_range.start for seed_range in seed_ranges]        
+    starts = [seed_range.start for seed_range in seed_ranges]
     return min(starts)
 
 
 def _get_converters(data_list: list[str]) -> dict[str, list[tuple[range, int]]]:
-    
     converters: dict[str, list[tuple[range, int]]] = defaultdict(list)
     for key, value in _DATA_INDICES.items():
         _, *cdata = data_list[value].split("\n")
@@ -59,7 +57,7 @@ def _get_converters(data_list: list[str]) -> dict[str, list[tuple[range, int]]]:
             mod = dest - source
             converters[key].append((range(source, source + length), mod))
     return converters
-    
+
 
 def _apply_converters(converter: list[tuple[range, int]], input_range: range) -> list[range]:
     new_ranges: list[range] = []
@@ -83,24 +81,23 @@ def _apply_converters(converter: list[tuple[range, int]], input_range: range) ->
             new_ranges.append(range(c_range.start + mod, c_range.stop + mod))
         else:
             raise ValueError("This should never happen")
-    
+
     if not modified_ranges:
         return [input_range]
     if len(input_range) == sum(len(range) for range in modified_ranges):
         return new_ranges
-    
+
     modified_ranges.sort(key=lambda x: x.start)
     unmodified_ranges: list[range] = []
     for idx in range(len(modified_ranges) - 1):
         if modified_ranges[idx].stop != modified_ranges[idx + 1].start:
             unmodified_ranges.append(range(modified_ranges[idx].stop, modified_ranges[idx + 1].start))
-            
+
     if input_range.start < (min_modified := min([range.start for range in modified_ranges])):
         unmodified_ranges.append(range(input_range.start, min_modified))
     if input_range.stop > (max_modified := max([range.stop for range in modified_ranges])):
         unmodified_ranges.append(range(max_modified, input_range.stop))
     return unmodified_ranges + new_ranges
-
 
 
 def _process_value(value: int, all_ranges: dict[str, list[tuple[range, int]]]) -> int:
@@ -110,5 +107,3 @@ def _process_value(value: int, all_ranges: dict[str, list[tuple[range, int]]]) -
                 value += mod
                 break
     return value
-
-
