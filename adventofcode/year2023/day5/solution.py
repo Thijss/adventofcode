@@ -36,8 +36,6 @@ def part2(file_name: str) -> int:
 
     seed_ranges = [range(seeds[idx], seeds[idx] + seeds[idx + 1]) for idx in range(0, len(seeds), 2)]
 
-    # seed_ranges = [seed_ranges[3]]
-
     for converter in converters.values():
         new_ranges: list[range] = []
         for seed_range in seed_ranges:
