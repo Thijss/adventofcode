@@ -29,13 +29,12 @@ def part2(file_name: str) -> int:
     references: dict[str, tuple[str, str]] = _parse_references(reference_str)
 
     a_keys = [key for key in references.keys() if key.endswith("A")]
-    # z_keys = [key for key in references.keys() if key.endswith("Z")]
 
-    steps = [count_steps(instructions, references, key) for key in a_keys]
+    steps = [_count_steps(instructions, references, key) for key in a_keys]
     return lcm(*steps)
 
 
-def count_steps(instructions: list[int], references: dict[str, tuple[str, str]], key: str) -> int:
+def _count_steps(instructions: list[int], references: dict[str, tuple[str, str]], key: str) -> int:
     step_count = 0
     while not key.endswith("Z"):
         for inst in instructions:
@@ -50,7 +49,3 @@ def _parse_references(reference_str: str) -> dict[str, tuple[str, str]]:
         key, lvalue, rvalue = re.findall(r"[0-9A-Z]+", line)
         references[key] = (lvalue, rvalue)
     return references
-
-
-if __name__ == "__main__":
-    print(part2("real_data.txt"))
