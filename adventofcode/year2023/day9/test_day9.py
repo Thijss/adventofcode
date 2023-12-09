@@ -13,9 +13,9 @@ def test_part1_real_data() -> None:
 
 def test_part2_test_data() -> None:
     answer = part2("test_data.txt")
-    assert -1 == answer
+    assert 2 == answer
 
 
 def test_part2_real_data() -> None:
     answer = part2("real_data.txt")
-    assert -1 == answer
+    assert 803 == answer

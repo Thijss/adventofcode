@@ -7,16 +7,23 @@ def part1(file_name: str) -> int:
 
     total = 0
     for history in histories:
-        total += _find_next_value(history)
+        total += _predict_value(history, future=True)
     return total
 
 
 def part2(file_name: str) -> int:
     data = load_data(year=2023, day=9, file_name=file_name)
-    return 0
+    histories = [list(map(int, line.split(" "))) for line in data.splitlines()]
+
+    total = 0
+    for history in histories:
+        total += _predict_value(history, future=False)
+    return total
 
 
-def _find_next_value(history: list[int]) -> int:
+def _predict_value(history: list[int], future: bool) -> int:
+    pos = -1 if future else 0
+
     diff_dict: dict[int, list[int]] = {0: history}
     index = 1
     while True:
@@ -28,11 +35,13 @@ def _find_next_value(history: list[int]) -> int:
             break
 
     for idx in range(len(diff_dict) - 2, -1, -1):
-        last_value = diff_dict[idx][-1]
-        print(idx)
-        diff_value = diff_dict[idx + 1][-1]
-        diff_dict[idx].append(last_value + diff_value)
-    return diff_dict[0][-1]
+        base_value = diff_dict[idx][pos]
+        diff_value = diff_dict[idx + 1][pos]
+        if future:
+            diff_dict[idx].append(base_value + diff_value)
+        else:
+            diff_dict[idx].insert(0, base_value - diff_value)
+    return diff_dict[0][pos]
 
 
 def _find_diffs(numbers: list[int]):
