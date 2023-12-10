@@ -30,7 +30,6 @@ def part1(file_name: str) -> int:
     data = load_data(year=2023, day=10, file_name=file_name)
     data = data.replace("J", "⅃")
     grid = Grid(data)
-    print(data)
     grid.walk(0)
     grid.walk(1)
 
@@ -71,8 +70,6 @@ class Grid:
             neighbours = self.find_neighbours()
             if not neighbours:
                 break
-            if len(neighbours) > 1:
-                print()
             self.location = neighbours[0]
 
     def find_directions(self) -> tuple[str, ...]:
